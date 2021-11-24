@@ -1,61 +1,28 @@
 <template>
-  <div>
-    <v-row class="fill-height" justify="center" no-gutters>
-      <v-col cols="12" md="6">
-        <v-row class="fill-height" align="center" justify="center" no-gutters>
-          <v-col cols="8">
-            <v-col v-if="$vuetify.breakpoint.xs || $vuetify.breakpoint.sm" cols="12" >
-              <v-container></v-container>
-            </v-col>
-            <v-row justify="start">
-              <h1>Clink</h1>
-            </v-row>
-            <v-row justify="start">
-              <v-card
-                width="70%"
-                height="10"
-                color="primary"
-                elevation="0"
-              >
-              </v-card>
-            </v-row>
-            <v-row>
-              <v-container />
-            </v-row>
-            <v-row justify="center">
-              <body>
-                Using Clink is the best way to break down social barriers, meet new people,
-                and experience being in the moment. Clink utilizes Bluetooth technology
-                to allow you to message and connect with the people around with you. 
-                Download the app and start connecting!
-              </body>
-            </v-row>
-            <v-row>
-              <v-container />
-            </v-row>
-            <v-row>
-              <a href="https://apps.apple.com/app/id1570368363/">
-                <v-img 
-                  src="../assets/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
-                />
-              </a>
-            </v-row>
+  <div class="thanksgivingyeet">
+    <v-container fill-height fluid>
+      <v-row align="center"
+          justify="center"
+      >
+          <v-col>
+            <h1>{{ isIt ? 'YES' : 'NO' }}</h1>
           </v-col>
-        </v-row>
-      </v-col>
-      <v-col v-if="$vuetify.breakpoint.xs || $vuetify.breakpoint.sm" cols="12" >
-        <v-container></v-container>
-      </v-col>
-      <v-col cols="12" md="6">
-        <v-row class="fill-height" align="end" justify="end" no-gutters>
+      </v-row>
+      <v-row align="center"
+        justify="center"
+      >
+        <v-col class="d-flex flex-column justify-space-between align-center">
           <v-img
-            class="mockup"
             aspect-ratio="1"
-            src="../assets/deviceMockup.png"
+            height="350"
+            width="350"
+            max-height="350"
+            max-width="350"
+            :src="isIt ? getSrc('happy') : getSrc('sad')"
           ></v-img>
-        </v-row>
-      </v-col>
-    </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -64,8 +31,22 @@
 export default {
   name: 'Home',
   data: () => ({
-    //
+    
   }),
+  computed: {
+    isIt: () => {
+      let date = new Date(Date.now())
+      let month = date.getMonth()
+      let day = date.getDate()
+      return month == '10' && day == '25'
+    }
+  },
+  methods: {
+    getSrc(name) {
+        var images = require.context('../assets/', false, /\.jpg$/);
+        return images('./jonny-' + name + ".jpg")
+    }
+}
 };
 </script>
 
@@ -74,8 +55,11 @@ export default {
    background-color: red;
  }
 
- .background-color {
-   background-color: #E9EAE9;
+ .thanksgivingyeet {
+   color: white;
+   background-color: black;
+   text-align: center;
+   font-size: 100px;
  }
 
  .mockup {
